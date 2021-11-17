@@ -92,3 +92,19 @@ body{
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
     animation: fade 0.3s;
 }
+.cart-button button{
+    width:170px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00B4CC;
+    letter-spacing: 2px;
+    margin-top: 14px;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+    animation: fade 0.3s;
+}

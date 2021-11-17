@@ -12,43 +12,47 @@
     <div id="app">
         <header>
             <h1 v-text="sitename"></h1>
-            <button v-on:click='showCheckout' v-if="cartItemCount > 0">
-                {{cartItemCount}}
-                <span class="fas fa-cart-plus"></span> Cart
-            </button>
+           
         </header>
 
-        <div class="Sort">
-            
-                <h4>Sort by:</h4>
-          
-                    <label>
-                        <input v-model="sort" type="radio" name="Sort" value="price" v-on:click="sortedProducts('price', ord)"> Price
-                    </label><br>
-                    <label>
-                        <input v-model="sort" type="radio" name="Sort" value="subj"> Subject
-                    </label><br>
-                    <label>
-                        <input v-model="sort" type="radio" name="Sort" value="loc"> Location
-                    </label><br>
-                    <label>
-                        <input v-model="sort" type="radio" name="Sort" value="avail"> Availability
-                    </label><br>
-             
-
-                <h4>Order</h4>
-               
-                    <label>
-                        <input v-model="ord" type="radio" name="Order" value="asc"> Ascending
-                    </label><br>
-                    <label>
-                        <input type="radio" name="Order" value="des" v-model="ord"> Descending
-                    </label><br>
-            
-                
-            </div>
+ 
        
             <div v-if='showProduct'>
+                <div class="cart-button">
+                <button v-on:click='showCheckout' v-if="cartItemCount > 0">
+                    {{cartItemCount}}
+                    <span class="fas fa-cart-plus"></span> Cart
+                </button>
+            </div>
+                <div class="Sort">
+            
+                    <h4>Sort by:</h4>
+              
+                        <label>
+                            <input v-model="sort" type="radio" name="Sort" value="price" v-on:click="sortedProducts('price', ord)"> Price
+                        </label><br>
+                        <label>
+                            <input v-model="sort" type="radio" name="Sort" value="subj"> Subject
+                        </label><br>
+                        <label>
+                            <input v-model="sort" type="radio" name="Sort" value="loc"> Location
+                        </label><br>
+                        <label>
+                            <input v-model="sort" type="radio" name="Sort" value="avail"> Availability
+                        </label><br>
+                 
+    
+                    <h4>Order</h4>
+                   
+                        <label>
+                            <input v-model="ord" type="radio" name="Order" value="asc"> Ascending
+                        </label><br>
+                        <label>
+                            <input type="radio" name="Order" value="des" v-model="ord"> Descending
+                        </label><br>
+                
+                    
+                </div>
                 <section class="new-released"  >
                     <div class="product-container" id="Shop-product">
                 <div v-for="product in sortedProducts(sort, ord)">
@@ -60,7 +64,7 @@
                     </figure>
                 </div>
                 <div class="product-details">
-                    <p v-html="product.description"></p>
+                    <p v-html="product.Location"></p>
                     <p>Price: {{product.price}}</p>
                     <p>Available stock: {{product.availableInventory -cartCount(product.id) }}</p>
 
@@ -96,10 +100,10 @@
                 <h2>Cart</h2>
                 <button v-on:click='showCheckout'>
                     {{cartItemCount}}
-                    <span class="fas fa-cart-plus"></span> Cart
+                    <span class="fas fa-cart-plus"></span>CheckOut
                 </button>
                 <div class="product-container" id="Shop-product">
-                  
+                    <div v-for="product in cart">
                         <div class="product-box">
                         <h2 v-text="product.Subject"></h2>
                         <div class="product-img">
@@ -110,9 +114,20 @@
                     <div class="product-details">
                         <p v-html="product.description"></p>
                         <p>Price: {{product.price}}</p>
+                        <div class="add-cart">
+                            <button v-on:click='RemoveItem(product)'>Remove Item</button>
+        
+                           
+                            </div>
                     </div>
                         </div>
                     </div>
+                    </div>
+                    <button v-on:click='showCheckout'>
+                        {{cartItemCount}}
+                        <span class="fas fa-cart-plus"></span>CheckOut
+                    </button>
+                    
             </div>
         </div>
     </div>
@@ -141,6 +156,9 @@
                     this.cart.push(product);
                     // console.log('adding to cart', product.id)
                 },
+                RemoveItem: function (product){
+                            this.cart.splice(this.cart.indexOf(product))
+                        },
                 showCheckout() {
                     // console.log(this.showProduct);
                     this.showProduct = this.showProduct ? false : true;
@@ -175,18 +193,18 @@
                                 case "loc":
                                     if (order == "asc") {
                                         function compareLocation(a, b) {
-                                            if (a.location > b.location)
+                                            if (a.Location > b.Location)
                                                 return 1
-                                            if (a.location < b.location)
+                                            if (a.Location < b.Location)
                                                 return -1
                                             return 0
                                         }
                                         return lessonsArray.sort(compareLocation)
                                     } else {
                                         function compareLocation(a, b) {
-                                            if (a.location > b.location)
+                                            if (a.Location > b.Location)
                                                 return -1
-                                            if (a.location < b.location)
+                                            if (a.Location < b.Location)
                                                 return 1
                                             return 0
                                         }
