@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Vue.js Pet Depot</title>
+    <title>After school classes</title>
     <script src="https://unpkg.com/vue"></script>
     <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -12,16 +12,46 @@
     <div id="app">
         <header>
             <h1 v-text="sitename"></h1>
-            <button v-on:click='showCheckout'>
+            <button v-on:click='showCheckout' v-if="cartItemCount > 0">
                 {{cartItemCount}}
-                <span class="fas fa-cart-plus"></span> Checkout
+                <span class="fas fa-cart-plus"></span> Cart
             </button>
         </header>
-        <main>
+
+        <div class="Sort">
+            
+                <h4>Sort by:</h4>
+          
+                    <label>
+                        <input v-model="sort" type="radio" name="Sort" value="price" v-on:click="sortedProducts('price', ord)"> Price
+                    </label><br>
+                    <label>
+                        <input v-model="sort" type="radio" name="Sort" value="subj"> Subject
+                    </label><br>
+                    <label>
+                        <input v-model="sort" type="radio" name="Sort" value="loc"> Location
+                    </label><br>
+                    <label>
+                        <input v-model="sort" type="radio" name="Sort" value="avail"> Availability
+                    </label><br>
+             
+
+                <h4>Order</h4>
+               
+                    <label>
+                        <input v-model="ord" type="radio" name="Order" value="asc"> Ascending
+                    </label><br>
+                    <label>
+                        <input type="radio" name="Order" value="des" v-model="ord"> Descending
+                    </label><br>
+            
+                
+            </div>
+       
             <div v-if='showProduct'>
                 <section class="new-released"  >
                     <div class="product-container" id="Shop-product">
-                <div v-for="product in sortedProducts">
+                <div v-for="product in sortedProducts(sort, ord)">
                     <div class="product-box">
                     <h2 v-text="product.Subject"></h2>
                     <div class="product-img">
@@ -34,10 +64,7 @@
                     <p>Price: {{product.price}}</p>
                     <p>Available stock: {{product.availableInventory -cartCount(product.id) }}</p>
 
-                    <!-- <button v-on:click="addToCart" 
-                    v-show='canAddToCart'>
-                    Add to cart
-                    </button> -->
+                   
                     <div class="add-cart">
                     <button v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add to cart</button>
 
@@ -61,119 +88,159 @@
                 
                 </section>
             </div>
+
+
+
+
             <div v-else>
-                <h2>Checkout</h2>
-                <p>
-                    <strong>First Name:</strong>
-                    <!-- This input field is bound to 'firstName' in the 'order' object -->
-                    <input v-model.trim="order.firstName" />
-                </p>
-                <p>
-                    <strong>Last Name:</strong>
-                    <!-- This input field is bound to 'lastName' in the 'order' object -->
-                    <input v-model.trim="order.lastName" />
-                </p>
-                <p>
-                    <strong>Address:</strong>
-                    <input v-model="order.address" />
-                </p>
-                <p>
-                    <strong>City:</strong>
-                    <input v-model="order.city" />
-                </p>
-                <p>
-                    <strong>State:</strong>
-                    <select v-model="order.state">
-                        <option disabled value="">State</option>
-                        <option v-for="(state, key) in states" v-bind:value="state">
-                            {{key}}
-                        </option>
-                        <!-- <option v-bind:value="states.AL">AL</option>
-                        <option v-bind:value="states.AR">AR</option>
-                        <option v-bind:value="states.CA">CA</option>
-                        <option v-bind:value="states.NV">NV</option> -->
-                    </select>
-                </p>
-                <p>
-                    <strong>Zip / Postal Code:</strong>
-                    <input v-model.number="order.zip" type="number" />
-                </p>
-
-                <p><input type="checkbox" id="gift" value="true" v-model="order.gift" v-bind:true-value="order.sendGift"
-                        v-bind:false-value="order.dontSendGift">
-                    <label for="gift">Ship As Gift?</label></p>
-
-                <p>
-                    <input type="radio" id="home" value="Home" v-model="order.method">
-                    <label for="home">Home</label>
-                    <input type="radio" id="business" value="Business" v-model="order.method">
-                    <label for="business">Business</label>
-                </p>
-
-                <h2>Order Information</h2>
-                <p>First Name: {{order.firstName}}</p>
-                <p>Last Name: {{order.lastName}}</p>
-                <p>Address: {{order.address}}</p>
-                <p>City: {{order.city}}</p>
-                <p>Zip: {{order.zip}}</p>
-                <p>State: {{order.state}}</p>
-                <p>Gift? {{order.gift}}</p>
-                <p>Method: {{order.method}}</p>
-                <div v-if='showProduct'>
-                    <div v-for="product in sortedProducts">
-                        <h2 v-text="product.title"></h2>
+                <h2>Cart</h2>
+                <button v-on:click='showCheckout'>
+                    {{cartItemCount}}
+                    <span class="fas fa-cart-plus"></span> Cart
+                </button>
+                <div class="product-container" id="Shop-product">
+                  
+                        <div class="product-box">
+                        <h2 v-text="product.Subject"></h2>
+                        <div class="product-img">
                         <figure>
                             <img v-bind:src="product.image">
                         </figure>
+                    </div>
+                    <div class="product-details">
                         <p v-html="product.description"></p>
                         <p>Price: {{product.price}}</p>
                     </div>
-
-
-                <button v-on:click="submitForm">Place Order</button>
+                        </div>
+                    </div>
             </div>
-        </main>
+        </div>
     </div>
+
 
     <script type="text/javascript">
         var webstore = new Vue({
             el: '#app',
             data: {
-                sitename: 'Vue.js Pet Depot',
+                sitename: 'After School Classes',
                 products: products,
                 cart: [],
                 showProduct: true,
                 order: {
-                    firstName: '',
-                    lastName: '',
-                    address: '',
-                    city: '',
-                    zip: '',
-                    state: '',
-                    method: 'Home',
-                    gift: 'Send as a gift',
-                    sendGift: 'Send as a gift',
-                    dontSendGift: 'Do not send as a gift'
+                    Name: '',
+                    PhoneNum: '',
+                
                 },
-                states: {
-                    AL: 'Alabama',
-                    AR: 'Arizona',
-                    CA: 'California',
-                    NV: 'Nevada'
-                },
+                sort: "subj",
+                 ord: "asc"
+
             },
-            // created: function () {
-            //     this.products = allProducts
-            // },
+            
             methods: {
                 addToCart(product) {
-                    this.cart.push(product.id);
+                    this.cart.push(product);
                     // console.log('adding to cart', product.id)
                 },
                 showCheckout() {
                     // console.log(this.showProduct);
                     this.showProduct = this.showProduct ? false : true;
                 },
+                sortedProducts(sort, order) {
+                            let lessonsArray = this.products.slice(0);
+                            switch (sort) {
+                                // sort by price
+                                case "price":
+                                    if (order == "asc") {
+                                        function comparePrice(a, b) {
+                                            if (a.price > b.price)
+                                                return 1
+                                            if (a.price < b.price)
+                                                return -1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(comparePrice)
+                                    } else {
+                                        function comparePrice(a, b) {
+                                            if (a.price > b.price)
+                                                return -1
+                                            if (a.price < b.price)
+                                                return 1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(comparePrice)
+                                    }
+                                    break;
+                                
+                                // sort by location
+                                case "loc":
+                                    if (order == "asc") {
+                                        function compareLocation(a, b) {
+                                            if (a.location > b.location)
+                                                return 1
+                                            if (a.location < b.location)
+                                                return -1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareLocation)
+                                    } else {
+                                        function compareLocation(a, b) {
+                                            if (a.location > b.location)
+                                                return -1
+                                            if (a.location < b.location)
+                                                return 1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareLocation)
+                                    }
+                                    break;
+                                
+                                // sort by availability
+                                case "avail":
+                                    if (order == "asc") {
+                                        function compareAvailability(a, b) {
+                                            if (a.availableInventory > b.availableInventory)
+                                                return 1
+                                            if (a.availableInventory < b.availableInventory)
+                                                return -1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareAvailability)
+                                    } else {
+                                        function compareAvailability(a, b) {
+                                            if (a.availableInventory > b.availableInventory)
+                                                return -1
+                                            if (a.availableInventory < b.availableInventory)
+                                                return 1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareAvailability)
+                                    }
+                                    break;
+
+                                // by default, compare subject
+                                default:
+                                    if (order == "asc") {
+                                        function compareSubject(a, b) {
+                                            if (a.Subject > b.Subject)
+                                                return 1
+                                            if (a.Subject < b.Subject)
+                                                return -1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareSubject)
+                                    } else {
+                                        function compareSubject(a, b) {
+                                            if (a.Subject > b.Subject)
+                                                return -1
+                                            if (a.Subject < b.Subject)
+                                                return 1
+                                            return 0
+                                        }
+                                        return lessonsArray.sort(compareSubject)
+                                    }
+                                    break;
+                            }
+                        },
                 submitForm() {
                     alert('Order submitted!')
                 },
@@ -194,20 +261,8 @@
                 cartItemCount() {
                     return this.cart.length;
                 },
-                // canAddToCart(product) {
-                //     return product.availableInventory > this.cartItemCount;
-                // }
-                sortedProducts() {
-                    let productsArray = this.products.slice(0);
-                    function compare(a, b) {
-                        if (a.price > b.price)
-                            return 1;
-                        if (a.price < b.price)
-                            return -1;
-                        return 0;
-                    }
-                    return productsArray.sort(compare);
-                }
+               
+              
             },
         });
     </script>

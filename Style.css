@@ -1,9 +1,23 @@
 body{
     width: 100%;
+    
 	}
 	html {
   scroll-behavior: smooth;
 }
+
+.Sort{
+    top:300px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    font-size: 20px;
+    color: #00B4CC;
+    font-family: "Comic Sans MS", "Courier New", monospace;
+}
+
 .new-released{
     display: flex;
     flex-direction: column;
@@ -16,7 +30,7 @@ body{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin-top: 1000px;
+    top: 500px;
 }
 .product-container h2{
     font-size: 30px;
