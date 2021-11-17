@@ -3,7 +3,7 @@
 <head>
     <title>Vue.js Pet Depot</title>
     <script src="https://unpkg.com/vue"></script>
-    <script src="products.js"></script>
+    <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
 
@@ -19,7 +19,7 @@
         <main>
             <div v-if='showProduct'>
                 <div v-for="product in sortedProducts">
-                    <h2 v-text="product.title"></h2>
+                    <h2 v-text="product.Subject"></h2>
                     <figure>
                         <img v-bind:src="product.image">
                     </figure>
@@ -128,15 +128,6 @@
             data: {
                 sitename: 'Vue.js Pet Depot',
                 products: products,
-                // product: {
-                //     id: 1001,
-                //     title: "Cat Food, 25lb bag",
-                //     description: "A 25 pound bag of <em>irresistible</em>, " + "organic goodness for your cat.",
-                //     price: 2000,
-                //     image: "images/product-fullsize.png",
-                //     availableInventory: 10,
-                //     rating: 3
-                // },
                 cart: [],
                 showProduct: true,
                 order: {
