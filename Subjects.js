@@ -22,7 +22,7 @@ let products = [
       "Subject": "Physics",
       "Location": "Manchester",
       "price": 40.00,
-      "image": "./images/cat.jpg",
+      "image": "./images/physics.jpg",
       "availableInventory": 5,
       "rating": 2
     },
@@ -31,7 +31,7 @@ let products = [
       "Subject": "Music",
       "Location": "Bristol",
       "price": 50.00,
-      "image": "./images/cat.jpg",
+      "image": "./images/music.png",
       "availableInventory": 5,
       "rating": 2
     },
@@ -40,7 +40,7 @@ let products = [
       "Subject": "French",
       "Location": "Manchester",
       "price": 30.00,
-      "image": "./images/cat.jpg",
+      "image": "./images/french.jpg",
       "availableInventory": 5,
       "rating": 2
     },
@@ -67,7 +67,7 @@ let products = [
       "Subject": "Arabic Language",
       "Location": "Abuja",
       "price": 30.00,
-      "image": "./images/cat.jpg",
+      "image": "./images/arabic.jpg",
       "availableInventory": 5,
       "rating": 2
     },
@@ -76,7 +76,7 @@ let products = [
       "Subject": "Economics",
       "Location": "Lagos",
       "price": 50.00,
-      "image": "./images/cat.jpg",
+      "image": "./images/economics.jpg",
       "availableInventory": 5,
       "rating": 2
     },
