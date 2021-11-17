@@ -5,6 +5,7 @@
     <script src="https://unpkg.com/vue"></script>
     <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="Style.css">
 </head>
 
 <body>
@@ -18,11 +19,17 @@
         </header>
         <main>
             <div v-if='showProduct'>
+                <section class="new-released"  >
+                    <div class="product-container" id="Shop-product">
                 <div v-for="product in sortedProducts">
+                    <div class="product-box">
                     <h2 v-text="product.Subject"></h2>
+                    <div class="product-img">
                     <figure>
                         <img v-bind:src="product.image">
                     </figure>
+                </div>
+                <div class="product-details">
                     <p v-html="product.description"></p>
                     <p>Price: {{product.price}}</p>
                     <p>Available stock: {{product.availableInventory -cartCount(product.id) }}</p>
@@ -31,11 +38,11 @@
                     v-show='canAddToCart'>
                     Add to cart
                     </button> -->
-
+                    <div class="add-cart">
                     <button v-on:click='addToCart(product)' v-if='canAddToCart(product)'>Add to cart</button>
 
                     <button disabled="disabled" v-else>Add to cart</button>
-
+                    </div>
                     <span v-if='product.availableInventory === cartCount(product.id)'>All out!</span>
                     <span v-else-if="product.availableInventory - cartCount(product.id) < 5">
                         Only {{product.availableInventory - cartCount(product.id)}} left!
@@ -48,6 +55,11 @@
                         <span v-for='n in 5-product.rating'>☆</span>
                     </div>
                 </div>
+                    </div>
+                </div>
+                    </div>
+                
+                </section>
             </div>
             <div v-else>
                 <h2>Checkout</h2>
@@ -106,7 +118,8 @@
                 <p>Zip: {{order.zip}}</p>
                 <p>State: {{order.state}}</p>
                 <p>Gift? {{order.gift}}</p>
-                <p>Method: {{order.method}}</p><div v-if='showProduct'>
+                <p>Method: {{order.method}}</p>
+                <div v-if='showProduct'>
                     <div v-for="product in sortedProducts">
                         <h2 v-text="product.title"></h2>
                         <figure>
