@@ -102,7 +102,7 @@
                 </div>
                 <div class="classes-back">
                 <button v-on:click='showCheckout'>
-                    <span class="fas fa-cart-plus"></span>Classes Available
+                    <span></span>Classes Available
                 </button>
             </div>
                 <div class="product-container" id="Shop-product">
@@ -129,7 +129,7 @@
                     <form>
                         <div class="row m-5">
                             <div class="form-group col-4">
-                                <input v-model="order.Name" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Full Name">
+                                <input v-model="order.Name" class="form-control border-top-0 border-left-0 border-right-0" placeholder=" Name">
                             </div>
                             <div class="form-group col-4">
                                 <input v-model.number="order.phoneNum" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Phone">
@@ -178,7 +178,7 @@
                     this.showProduct = this.showProduct ? false : true;
                 },
                 sortedProducts(sort, order) {
-                            let lessonsArray = this.products.slice(0);
+                            let SubjectsArray = this.products.slice(0);
                             switch (sort) {
                                 // sort by price
                                 case "price":
@@ -190,7 +190,7 @@
                                                 return -1
                                             return 0
                                         }
-                                        return lessonsArray.sort(comparePrice)
+                                        return SubjectsArray.sort(comparePrice)
                                     } else {
                                         function comparePrice(a, b) {
                                             if (a.price > b.price)
@@ -199,7 +199,7 @@
                                                 return 1
                                             return 0
                                         }
-                                        return lessonsArray.sort(comparePrice)
+                                        return SubjectsArray.sort(comparePrice)
                                     }
                                     break;
                                 
@@ -213,7 +213,7 @@
                                                 return -1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareLocation)
+                                        return SubjectsArray.sort(compareLocation)
                                     } else {
                                         function compareLocation(a, b) {
                                             if (a.Location > b.Location)
@@ -222,7 +222,7 @@
                                                 return 1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareLocation)
+                                        return SubjectsArray.sort(compareLocation)
                                     }
                                     break;
                                 
@@ -236,7 +236,7 @@
                                                 return -1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareAvailability)
+                                        return SubjectsArray.sort(compareAvailability)
                                     } else {
                                         function compareAvailability(a, b) {
                                             if (a.availableInventory > b.availableInventory)
@@ -245,7 +245,7 @@
                                                 return 1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareAvailability)
+                                        return SubjectsArray.sort(compareAvailability)
                                     }
                                     break;
 
@@ -259,7 +259,7 @@
                                                 return -1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareSubject)
+                                        return SubjectsArray.sort(compareSubject)
                                     } else {
                                         function compareSubject(a, b) {
                                             if (a.Subject > b.Subject)
@@ -268,7 +268,7 @@
                                                 return 1
                                             return 0
                                         }
-                                        return lessonsArray.sort(compareSubject)
+                                        return SubjectsArray.sort(compareSubject)
                                     }
                                     break;
                             }
