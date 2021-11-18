@@ -6,6 +6,27 @@ body{
   scroll-behavior: smooth;
 }
 
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    font-size: 25px;
+    color: #00B4CC;
+    font-family: "Comic Sans MS", "Courier New", monospace;
+} 
+
+.cart-head{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 30px;
+    font-size: 25px;
+    color: #00B4CC;
+    font-family: "Comic Sans MS", "Courier New", monospace;
+}
 .Sort{
     top:300px;
     display: flex;
@@ -16,6 +37,24 @@ body{
     font-size: 20px;
     color: #00B4CC;
     font-family: "Comic Sans MS", "Courier New", monospace;
+}
+
+.classes-back button{
+    width:170px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00B4CC;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    margin-left: 1200px;
+    border-radius: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+    animation: fade 0.3s;
 }
 
 .new-released{
@@ -100,7 +139,8 @@ body{
     align-items: center;
     background-color: #00B4CC;
     letter-spacing: 2px;
-    margin-top: 14px;
+    margin-top: 10px;
+    margin-left: 1200px;
     border-radius: 10%;
     display: flex;
     justify-content: center;

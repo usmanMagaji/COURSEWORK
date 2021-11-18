@@ -3,6 +3,7 @@
 <head>
     <title>After school classes</title>
     <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="Style.css">
@@ -12,7 +13,6 @@
     <div id="app">
         <header>
             <h1 v-text="sitename"></h1>
-           
         </header>
 
  
@@ -66,7 +66,7 @@
                 <div class="product-details">
                     <p v-html="product.Location"></p>
                     <p>Price: {{product.price}}</p>
-                    <p>Available stock: {{product.availableInventory -cartCount(product.id) }}</p>
+                    <p>Available stock: {{product.availableInventory -cartCount(product) }}</p>
 
                    
                     <div class="add-cart">
@@ -74,9 +74,9 @@
 
                     <button disabled="disabled" v-else>Add to cart</button>
                     </div>
-                    <span v-if='product.availableInventory === cartCount(product.id)'>All out!</span>
-                    <span v-else-if="product.availableInventory - cartCount(product.id) < 5">
-                        Only {{product.availableInventory - cartCount(product.id)}} left!
+                    <span v-if='product.availableInventory === cartCount(product)'>All out!</span>
+                    <span v-else-if='product.availableInventory - cartCount(product) < 5'>
+                        Only {{product.availableInventory - cartCount(product)}} left!
                     </span>
                     <span v-else>Buy now!</span>
 
@@ -97,11 +97,14 @@
 
 
             <div v-else>
+                <div class="cart-head">
                 <h2>Cart</h2>
+                </div>
+                <div class="classes-back">
                 <button v-on:click='showCheckout'>
-                    {{cartItemCount}}
-                    <span class="fas fa-cart-plus"></span>CheckOut
+                    <span class="fas fa-cart-plus"></span>Classes Available
                 </button>
+            </div>
                 <div class="product-container" id="Shop-product">
                     <div v-for="product in cart">
                         <div class="product-box">
@@ -123,11 +126,21 @@
                         </div>
                     </div>
                     </div>
-                    <button v-on:click='showCheckout'>
-                        {{cartItemCount}}
-                        <span class="fas fa-cart-plus"></span>CheckOut
-                    </button>
-                    
+                    <form>
+                        <div class="row m-5">
+                            <div class="form-group col-4">
+                                <input v-model="order.Name" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Full Name">
+                            </div>
+                            <div class="form-group col-4">
+                                <input v-model.number="order.phoneNum" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Phone">
+                            </div>
+                            <div class="form-group col-4">
+                                <button class="btn btn-primary" v-if="checkoutBtn" v-on:click="submitForm">Checkout</button>
+    
+                                <button class="btn btn-secondary" disabled v-else>Checkout</button>
+                            </div>
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -154,6 +167,7 @@
             methods: {
                 addToCart(product) {
                     this.cart.push(product);
+                    
                     // console.log('adding to cart', product.id)
                 },
                 RemoveItem: function (product){
@@ -263,7 +277,7 @@
                     alert('Order submitted!')
                 },
                 canAddToCart(product) {
-                    return product.availableInventory > this.cartCount(product.id);
+                    return product.availableInventory > this.cartCount(product);
                 },
                 cartCount(id) {
                     let count = 0;
@@ -279,6 +293,14 @@
                 cartItemCount() {
                     return this.cart.length;
                 },
+                checkoutBtn() {
+                            if (this.order.Name && this.order.phoneNum) {
+                                return true
+                            }
+                            else {
+                                return false
+                            }
+                        }
                
               
             },
