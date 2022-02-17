@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 const MongoClient = require('mongodb').MongoClient
 let db
 MongoClient.connect('mongodb+srv://Usman:Magaji222@cluster0.vjsdl.mongodb.net', (err, client) => {
-    db = client.db('web-store')
+    db = client.db('webstore')
 })
 
 //middleware to handle images 
