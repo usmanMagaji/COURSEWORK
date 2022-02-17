@@ -3,7 +3,6 @@
 <head>
     <title>After school classes</title>
     <script src="https://unpkg.com/vue"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="Style.css">
@@ -53,7 +52,7 @@
                 
                     
                 </div>
-                <section class="new-released"  >
+                <section class="Suject-lessons"  >
                     <div class="product-container" id="Shop-product">
                 <div v-for="product in sortedProducts(sort, ord)">
                     <div class="product-box">
@@ -126,24 +125,19 @@
                         </div>
                     </div>
                     </div>
-                    <form>
-                        <div class="row m-5">
-                            <div class="form-group col-4">
-                                <input v-model="order.Name" class="form-control border-top-0 border-left-0 border-right-0" placeholder=" Name">
-                            </div>
-                            <div class="form-group col-4">
-                                <input v-model.number="order.phoneNum" class="form-control border-top-0 border-left-0 border-right-0" placeholder="Phone">
-                            </div>
-                            <div class="form-group col-4">
-                                <button class="btn btn-primary" v-if="checkoutBtn" v-on:click="submitForm">Checkout</button>
+                    <div class="CheckOut-form">
+        
+                                <input v-model="order.Name" placeholder=" Name">
+                                
+                                <input v-model.number="order.phoneNum" placeholder="Phone">
+                                <button v-if="checkoutBtn" v-on:click="submitForm">Checkout</button>
     
-                                <button class="btn btn-secondary" disabled v-else>Checkout</button>
-                            </div>
+                                <button disabled v-else>Checkout</button>
+                  
                         </div>
-                    </form>
             </div>
-        </div>
-    </div>
+            </div>
+      
 
 
     <script type="text/javascript">
@@ -180,7 +174,7 @@
                 sortedProducts(sort, order) {
                             let SubjectsArray = this.products.slice(0);
                             switch (sort) {
-                                // sort by price
+                                
                                 case "price":
                                     if (order == "asc") {
                                         function comparePrice(a, b) {
@@ -203,7 +197,7 @@
                                     }
                                     break;
                                 
-                                // sort by location
+                                
                                 case "loc":
                                     if (order == "asc") {
                                         function compareLocation(a, b) {
@@ -226,7 +220,7 @@
                                     }
                                     break;
                                 
-                                // sort by availability
+                                
                                 case "avail":
                                     if (order == "asc") {
                                         function compareAvailability(a, b) {

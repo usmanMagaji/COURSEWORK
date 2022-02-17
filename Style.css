@@ -57,7 +57,7 @@ header{
     animation: fade 0.3s;
 }
 
-.new-released{
+.Subject-lessons{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -148,3 +148,33 @@ header{
     box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
     animation: fade 0.3s;
 }
+.CheckOut-form {
+    display: flex;
+    flex-direction: row;
+    margin-top:100px;
+    width:1000px;
+    height:70px;
+    margin-left:150px;
+    border: 1px solid #f1f1f1;
+    padding: 20px;
+    background-color: white;
+  }
+  .CheckOut-form  input{
+    width: 90%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    
+  }
+  .CheckOut-form button {
+    background-color:#00B4CC;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: 1;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
