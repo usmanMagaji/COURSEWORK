@@ -2,7 +2,7 @@
 
 <head>
     <title>After school classes</title>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="Subjects.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="Style.css">
@@ -92,9 +92,6 @@
                 </section>
             </div>
 
-
-
-
             <div v-else>
                 <div class="cart-head">
                 <h2>Cart</h2>
@@ -107,7 +104,7 @@
                 <div class="product-container" id="Shop-product">
                     <div v-for="product in cart">
                         <div class="product-box">
-                        <h2 v-text="product.Subject"></h2>
+                        <h2 v-text="product.title"></h2>
                         <div class="product-img">
                         <figure>
                             <img v-bind:src="product.image">
@@ -145,7 +142,7 @@
             el: '#app',
             data: {
                 sitename: 'After School Classes',
-                products: [],
+                products:[],
                 cart: [],
                 showProduct: true,
                 order: {
@@ -157,15 +154,15 @@
                  ord: "asc"
 
             },
-            created: {
+            created:{
                         function() {
                             // set the url to your server and route
-                            fetch('https://coursework2-3145.herokuapp.com/collection/product', {
+                            fetch('https://coursework2-3145.herokuapp.com/collection/Product', {
                                 method: 'GET', // set the HTTP method as 'POST'
                                 headers: {
                                     'Content-Type': 'application/json', // set the data type as JSON
                                 },
-                                body: JSON.stringify(products), // need to stringify the JSON object
+                                body: JSON.stringify(product), // need to stringify the JSON object
                             })
                                 .then(response => response.json())
                                 .then(responseJSON => {
