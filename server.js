@@ -8,7 +8,7 @@ const app = exp()
 
 //config express js
 app.use(exp.json())
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "*");
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -83,5 +83,5 @@ app.delete('/collection/:collectionName/:id', (req, res, next) => {
 
 //start server
 app.listen(port, () => {
-    console.log('Express js server runnning on localhost:3000')
+    console.log('Express js server runnning on localhost:8080')
 })
