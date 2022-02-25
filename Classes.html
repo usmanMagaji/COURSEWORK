@@ -299,7 +299,7 @@
                    .then(response => response.json())
                    .then(responseJSON =>{
                        console.log('Success:', responseJSON);
-                       updateSpace(this.cart,);
+                    
                    });
                    
                    alert("Order added");
@@ -309,25 +309,6 @@
 
                
 
-
-                updateSpace(id,Space){
-                       const spaceValue="availableInventory";
-                      
-                       fetch('https://coursework2-3145.herokuapp.com/collection/Product/${id}/reduce/${spaceValue}/${Space}',{
-                       method: 'PUT',
-                       headers:{
-                           'Content-Type': 'application/json',
-                           'mode':'no cors'
-                       }
-
-
-                   })
-                   .then(response => response.json())
-                   .then(responseJSON =>{
-                       console.log('Success:', responseJSON);
-                   });
-
-                   },
                 canAddToCart(product) {
                     return product.availableInventory > this.cartCount(product);
                 },
@@ -340,7 +321,7 @@
                     }
                     return count;
                 }
-            },
+            } ,
             computed: {
                 cartItemCount() {
                     return this.cart.length;

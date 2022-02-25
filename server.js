@@ -2,6 +2,7 @@
 const exp = require('express')
 const { ObjectID } = require('mongodb')
 var path = require("path");
+var fs = require("fs");
 
 //create an express js instance
 const app = exp()
@@ -22,12 +23,29 @@ let db
 MongoClient.connect('mongodb+srv://Usman:Magaji222@cluster0.f71jw.mongodb.net/test', (err, client) => {
     db = client.db('webstore')
 })
-
+/** 
 //middleware to handle images 
-app.get('/collection/Product/image', (req, res, next) => {
-    var imagePath = path.resolve(__dirname, "images"); 
-    app.use("/image", express.static(imagePath));
-})
+app.use(function(req, res, next) {
+    // Uses path.join to find the path where the file should bevar 
+    filePath = path.join
+    (__dirname, "images", req.url);
+    fs.stat(filePath, function(err, fileInfo) {
+        if (err) {            
+            next();
+            return;        
+        }
+        if (fileInfo.isFile()) 
+        res.sendFile(filePath);
+        else next();  
+      });
+});
+
+app.use(function(req,res){
+    res.status(404);
+    res.send("File not found");
+});
+*/
+
 
 //display a message or root path to show that API is working
 app.get('/', (req, res, next) => {
@@ -47,6 +65,7 @@ app.get('/collection/:collectionName', (req, res, next) => {
         res.send(results)
     })
 })
+
 
 //posting new data to the collection
 app.post('/collection/:collectionName', (req, res, next) => {
