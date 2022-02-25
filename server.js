@@ -23,7 +23,7 @@ let db
 MongoClient.connect('mongodb+srv://Usman:Magaji222@cluster0.f71jw.mongodb.net/test', (err, client) => {
     db = client.db('webstore')
 })
-/** 
+ 
 //middleware to handle images 
 app.use(function(req, res, next) {
     // Uses path.join to find the path where the file should bevar 
@@ -44,7 +44,7 @@ app.use(function(req,res){
     res.status(404);
     res.send("File not found");
 });
-*/
+
 
 
 //display a message or root path to show that API is working
